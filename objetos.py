@@ -27,7 +27,7 @@ class Vazio(Objeto):
 class Maca(Objeto):
     def __init__(self, emoji='🍎'):
         self.emoji = emoji
-        self.estamina = 3
+        self.estamina = 5
         self.vida = 1
 
     def regenerar(self):
@@ -86,7 +86,7 @@ class Cacto(Objeto):
 class Pessoa(Objeto):
     def __init__(self, nivel, emoji='👺'):
         self.nivel = nivel
-        self.dano = 4
+        self.dano = 1
         self.vida = 5
         self.emoji = emoji
 
@@ -114,3 +114,10 @@ class Pessoa(Objeto):
 
     def som(self):
         print("Dino bateu na pessoa")
+
+# class Bandeira(Objeto):
+#     def __init__(self, emoji='🎈'):
+#         self.emoji = emoji
+
+#     def aparencia(self):
+#         return self.emoji

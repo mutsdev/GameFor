@@ -2,6 +2,10 @@ from dinossauro import Dinossauro
 from objetos import *
 from time import sleep
 
+
+# ajustar os casos de lava
+# opcoes de ataque
+
 dino = Dinossauro()
 block = Bloco()
 lava = Lava()
@@ -12,7 +16,7 @@ maca = Maca()
 mob = Pessoa(1)
 
 mapa_sup = [dino, vazio] + [maca, mob, mob, vazio, vazio, maca, mob, vazio, mob, maca, vazio, mob] * 4
-mapa_terreno = [block] * 50
+mapa_terreno = [block, block, lava, lava, block, lava, block, lava, block, block] * 5
 
 mapa_legal_sup = ''.join([obj.aparencia() for obj in mapa_sup])
 mapa_legal = ''.join([obj.aparencia() for obj in mapa_terreno])
@@ -27,8 +31,8 @@ imprimir_mapa(mapa_legal_sup, mapa_legal)
 while True:
     if '☠️' in mapa_legal_sup:
         break
-    sleep(0.5)
-    resposta = 1 #int(input("Digite um número: "))
+    
+    resposta = int(input("Digite um número: "))
     match resposta:
         case 1:
             mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob)
@@ -37,7 +41,19 @@ while True:
                 dino.vida -= lava.atacar()
                 print(f"Você pulou na lava, sua vida agora é {dino.vida}")         
         case 2:
-            continue
+            mapa_legal_sup = dino.pula(mapa_legal_sup, maca, mob)
+            pos = mapa_legal_sup.find(dino.aparencia())
+            if mapa_legal[pos] == lava.aparencia():
+                dino.vida -= lava.atacar()
+                print(f"Você pulou na lava, sua vida agora é {dino.vida}")    
+        case 22:
+            mapa_legal_sup = dino.pula_pula(mapa_legal_sup, maca, mob)
+            pos = mapa_legal_sup.find(dino.aparencia())
+            
+            if mapa_legal[pos] == lava.aparencia():
+                dino.vida -= lava.atacar()
+                print(f"Você pulou na lava, sua vida agora é {dino.vida}")    
+            
 
     imprimir_mapa(mapa_legal_sup, mapa_legal)
 

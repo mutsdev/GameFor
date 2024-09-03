@@ -54,8 +54,15 @@ class Lava(Objeto):
         self.emoji = emoji
         self.dano = 3
 
-    def atacar(self):
-        return self.dano
+    def atacar(self, dino, mapa_atual):
+        dino.vida -= self.dano
+        mapa_final = mapa_atual
+        if (dino.vida <= 0):
+            mapa_final = dino.morte(mapa_atual)
+        else:
+            print(f"Você pulou na lava, sua vida agora é {dino.vida}")  
+
+        return mapa_final
 
     def som(self):
         print("Dino pulou a lava")
@@ -115,9 +122,9 @@ class Pessoa(Objeto):
     def som(self):
         print("Dino bateu na pessoa")
 
-# class Bandeira(Objeto):
-#     def __init__(self, emoji='🎈'):
-#         self.emoji = emoji
+class Bandeira(Objeto):
+    def __init__(self, emoji= '🎈'):
+        self.emoji = emoji
 
-#     def aparencia(self):
-#         return self.emoji
+    def aparencia (self):
+        return self.emoji

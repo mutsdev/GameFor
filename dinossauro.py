@@ -2,8 +2,8 @@ class Dinossauro:
     def __init__(self, xp=15, nome="Mutz", emoji='🦖'):
         self.nome = nome
 
-        self.vida = 10
-        self.estamina = 100
+        self.vida = 20
+        self.estamina = 20
         self.ataque = 3
         self.moedas = 0
 
@@ -14,12 +14,17 @@ class Dinossauro:
         self.estamina -= 1
         print("Pega")
     
-    def passo(self, mapa_atual, maca, mob):
+    def passo(self, mapa_atual, maca, mob, fim):
         pos = mapa_atual.find(self.emoji)
 
         prox = mapa_atual[pos + 1]
         current = mapa_atual[pos]
-        if (prox == maca.aparencia()):
+
+        if (prox == fim.aparencia()):
+            mapa_atual = self.win(mapa_atual, fim)
+            return mapa_atual
+
+        elif (prox == maca.aparencia()):
             print("\033[32mVida regenedara\033[0m")
             life, energery = maca.regenerar()
             self.estamina += energery
@@ -50,14 +55,18 @@ class Dinossauro:
 
         return mapa_atual
         
-    def pula(self, mapa_atual, maca, mob):
+    def pula(self, mapa_atual, maca, mob, fim):
         self.estamina -= 3
 
         pos = mapa_atual.find(self.emoji)
         p1 = mapa_atual[pos + 1]
         p2 = mapa_atual[pos + 2]
 
-        if (p2 == maca.aparencia()):
+        if (p1 == fim.aparencia() or p2 == fim.aparencia()):
+            mapa_atual = self.win(mapa_atual, fim)
+            return mapa_atual
+
+        elif (p2 == maca.aparencia()):
             print("\033[32mVida regenedara\033[0m")
             life, energery = maca.regenerar()
             self.estamina += energery
@@ -86,15 +95,20 @@ class Dinossauro:
 
         return mapa_atual
 
-    def pula_pula(self, mapa_atual, maca, mob):
+    def pula_pula(self, mapa_atual, maca, mob, fim):
         self.estamina -= 7
 
         pos = mapa_atual.find(self.emoji)
         p1 = mapa_atual[pos + 1]
         p2 = mapa_atual[pos + 2]
         p3 = mapa_atual[pos + 3]
+        final = fim.aparencia() 
 
-        if (p3 == maca.aparencia()):
+        if p1 == final or p2 == final or p3 == final:
+            mapa_atual = self.win(mapa_atual, fim)
+            return mapa_atual
+        
+        elif (p3 == maca.aparencia()):
             print("\033[32mVida regenedara\033[0m")
             life, energery = maca.regenerar()
             self.estamina += energery
@@ -134,6 +148,18 @@ class Dinossauro:
         print(f"\033[47mXP -> {self.xp} \033[0m")
         print(f"\033[43mMoedas -> {self.moedas} \033[0m")
         mapa_atual = mapa_atual.replace(self.emoji, "☠️ ", 1)
+
+        return mapa_atual
+
+    def win(self, mapa_atual, fim):
+        print("\033[31mVocê ganahou!\033[0m")
+        print(f"\033[41mOs resultados finais do dino {self.nome} foram: \033[0m")
+        print(f"\033[33mVida -> {self.vida} \033[0m")
+        print(f"\033[44mEstamina -> {self.estamina} \033[0m")
+        print(f"\033[47mXP -> {self.xp} \033[0m")
+        print(f"\033[43mMoedas -> {self.moedas} \033[0m")
+        mapa_atual = mapa_atual.replace(fim.aparencia(), "🎖️ ", 1)
+        mapa_atual = mapa_atual.replace(self.emoji, "🌌", 1)
 
         return mapa_atual
 

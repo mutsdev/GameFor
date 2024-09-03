@@ -104,3 +104,37 @@ for i in range(2, len(mapa_legal)):
 #     mapa_legal_sup = mapa_legal_sup.replace("", "", 1)
 
 #     imprimir_mapa(mapa_legal_sup, mapa_legal)
+
+
+
+
+# lista_alunos = []
+# lista_bons_alunos = []
+
+# print("Momento para adicionar o nome dos alunos da sua escola!")
+# x = input("Adicione um aluno: (0 para parar): ")
+
+# while x != '0':
+#     lista_alunos.append(x)
+
+#     x = input("Adicione um aluno: (0 para parar): ")
+    
+# print("A lista com os nomes dos alunos da sua escola é", lista_alunos)
+# print()
+# print("Momento para adicionar o nome dos melhores alunos do mundo!")
+# y = input("Adicione um nome (600 para parar): ")
+
+# while y != '600':
+#     lista_bons_alunos.append(y)
+#     y = input("Adicione um novo nome (600 para parar): ")
+
+# print("A lista com os nomes dos melhores alunos do mundo é ", lista_bons_alunos)
+# print()
+
+# # Preciso verificar se tem algum aluno da minha escola na lista 
+# # 
+# #dos melhores do mundo, poderia me ajudar, sou apenas uma senhorinha sem conhecimentos tecnológicos
+
+# for x in lista_alunos:
+#     if x in lista_bons_alunos:
+#         print(x,'esta na lista dos melhores do mundo')

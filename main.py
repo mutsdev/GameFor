@@ -2,8 +2,6 @@ from dinossauro import Dinossauro
 from objetos import *
 from time import sleep
 
-
-# ajusar o limite de pulo no final
 # Melhorar sistema de combate
 
 dino = Dinossauro()

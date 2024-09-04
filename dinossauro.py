@@ -2,8 +2,8 @@ class Dinossauro:
     def __init__(self, xp=15, nome="Mutz", emoji='🦖'):
         self.nome = nome
 
-        self.vida = 20
-        self.estamina = 20
+        self.vida = 10
+        self.estamina = 30
         self.ataque = 3
         self.moedas = 0
 
@@ -164,7 +164,7 @@ class Dinossauro:
         return mapa_atual
 
     def bate(self):
-        self.estamina -= 4
+        # self.estamina += 1
         return self.ataque
 
     def aparencia(self):

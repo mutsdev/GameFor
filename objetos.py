@@ -28,7 +28,7 @@ class Maca(Objeto):
     def __init__(self, emoji='🍎'):
         self.emoji = emoji
         self.estamina = 5
-        self.vida = 1
+        self.vida = 3
 
     def regenerar(self):
         return self.vida, self.estamina

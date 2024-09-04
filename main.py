@@ -4,8 +4,7 @@ from time import sleep
 
 
 # ajusar o limite de pulo no final
-# definir o que acontece quando acaba a estamina // uma boa ideia pode ser não deixar ele fazer o que não tem estamina suficiente
-
+# Melhorar sistema de combate
 
 dino = Dinossauro()
 block = Bloco()
@@ -42,19 +41,36 @@ while True:
             mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob, fim)
             pos = mapa_legal_sup.find(dino.aparencia())
             if mapa_legal[pos] == lava.aparencia():
-                mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)        
+                mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)     
+
         case 2:
-            mapa_legal_sup = dino.pula(mapa_legal_sup, maca, mob, fim)
-            pos = mapa_legal_sup.find(dino.aparencia())
-            if mapa_legal[pos] == lava.aparencia():
-                mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)   
+            if dino.estamina - 3 >= 0:
+                mapa_legal_sup = dino.pula(mapa_legal_sup, maca, mob, fim)
+                pos = mapa_legal_sup.find(dino.aparencia())
+                if mapa_legal[pos] == lava.aparencia():
+                    mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)   
+            else:
+                print(f"{dino.nome} não tem estamina suficiente para pular")
+                mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob, fim)
+
         case 22:
-            mapa_legal_sup = dino.pula_pula(mapa_legal_sup, maca, mob, fim)
-            pos = mapa_legal_sup.find(dino.aparencia())
-            
-            if mapa_legal[pos] == lava.aparencia():
-                mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)  
-            
+            if dino.estamina - 7 >= 0:
+                mapa_legal_sup = dino.pula_pula(mapa_legal_sup, maca, mob, fim)
+                pos = mapa_legal_sup.find(dino.aparencia())
+                
+                if mapa_legal[pos] == lava.aparencia():
+                    mapa_legal_sup = lava.atacar(dino, mapa_legal_sup)  
+            else:
+                if dino.estamina < 3:
+                    mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob, fim)
+                else:
+                    nova_resposta = int(input(f"O dino {dino.nome} tem apenas {dino.estamina} de estamina, deseja pular ou dar um passo? "))
+                    if nova_resposta == 2:
+                        mapa_legal_sup = dino.pula(mapa_legal_sup, maca, mob, fim)
+                    else:
+                        print(f"{dino.nome} não tem estamina suficiente para pular")
+                        mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob, fim)
+
     imprimir_mapa(mapa_legal_sup, mapa_legal)
 
 

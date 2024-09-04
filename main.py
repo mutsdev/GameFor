@@ -3,6 +3,8 @@ from objetos import *
 from time import sleep
 
 # Melhorar sistema de combate
+# Gerar mapas aleatórios
+# Verificar se a entrada foi válida 
 
 dino = Dinossauro()
 block = Bloco()
@@ -28,12 +30,21 @@ def imprimir_mapa(mapa_sup, mapa_terreno):
     print()
 
 imprimir_mapa(mapa_legal_sup, mapa_legal)
+possiveis_respostas = ['1', '2', '22']
 
 while True:
     if '☠️' in mapa_legal_sup or '🎖️' in mapa_legal_sup:
         break
-    
-    resposta = int(input("Digite um número: "))
+    a = input("Digite um número: ")
+    if a not in possiveis_respostas:
+        print()
+        print("Entrada Inválida")
+        print("1 - PASSO")
+        print("2 - PULO")
+        print("22 - PULO DUPLO")
+        
+        continue
+    resposta = int(a)
     match resposta:
         case 1:
             mapa_legal_sup = dino.passo(mapa_legal_sup, maca, mob, fim)

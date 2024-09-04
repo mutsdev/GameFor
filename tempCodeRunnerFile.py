@@ -1,1 +1,1 @@
-dino.
+print()
